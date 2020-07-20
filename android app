@@ -1,0 +1,106 @@
+                                                            xml code
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter name" />
+
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btn_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Login"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
+
+
+
+
+
+                                                                        JAVA code
+package com.example.newandroidproject;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText name_input;
+    EditText email_input;
+    EditText password_input;
+    Button btn_login;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        name_input=findViewById(R.id.name_input);
+        email_input=findViewById(R.id.email_input);
+        password_input=findViewById(R.id.password_input);
+        btn_login=findViewById(R.id.btn_input);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = name_input.getText().toString();
+                String email=email_input.getText().toString();
+                String password =password_input.getText().toString();
+
+                String msg ="Name: "+name+" Email: "+email+" Password: "+password;
+
+                Log.d("newandroidproject",msg);
+
+
+                Intent dataIntent = new Intent(getApplicationContext(),SecondActivity.class); //creating object
+                dataIntent.putExtra( "message",msg); // storing data
+                startActivity(dataIntent); // sending data
+            }
+        });
+
+    }
+}
